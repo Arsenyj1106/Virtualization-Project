@@ -1,0 +1,71 @@
+/* App.css */
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.task-form {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.task-form input {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.task-form button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.task-list {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 8px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+}
+
+.task-item.completed {
+  background-color: #e8ffe8;
+}
+
+.task-item.completed span {
+  text-decoration: line-through;
+  color: #666;
+}
+
+.task-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.task-item span {
+  flex: 1;
+}
+
+.delete-btn {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}

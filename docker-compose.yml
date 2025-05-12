@@ -1,0 +1,34 @@
+
+services:
+  backend:
+    build: ./backend
+    environment:
+#      ВСТАВИТЬ СЮДА АДРЕС КЛАСТЕРА POSTGRE
+      DATABASE_URL: "postgres://ars:pas@postgres:5432/testdb"
+      PORT: "8000"
+    ports:
+      - "7999:8000"
+    networks:
+      - network
+
+  frontend-prod:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    environment:
+      - NODE_ENV=production
+      - BACKEND_ADDRESS=http://localhost/api/:8000
+    container_name: frontend-prod
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - network
+    depends_on:
+      - backend
+
+
+networks:
+  network:
+    driver: bridge
