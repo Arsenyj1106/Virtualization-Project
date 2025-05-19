@@ -105,6 +105,11 @@ function App() {
                     </div>
                 ))}
             </div>
+            <div>
+                <h3>Пример изображений из storage</h3>
+                <img src={"https://storage.yandexcloud.net/todo-bucket-1234/exmp1.jpg"}/>
+                <img src={"https://storage.yandexcloud.net/todo-bucket-1234/exmp2.jpg"}/>
+            </div>
         </div>
     );
 }

@@ -6,9 +6,9 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
-// Настройка подключения к PostgreSQL
+
 const pool = new Pool({
-  connectionString: "postgres://pirogov:password@rc1a-6k8gc87wyxaqmjug.mdb.yandexcloud.net:6432/db1",
+  connectionString: process.env.PG_LINK,
   ssl: {
     rejectUnauthorized: false
   }
