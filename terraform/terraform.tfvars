@@ -1,6 +1,0 @@
-token="y0__xCpn4NuGMHdEyCjtISwEsZwXLCT3rDk_uLopGLAEAI5n3Cq"
-cloud_id="b1gthvgdoth30e6af5hk"
-folder_id="b1gv2q3sgnes7j1kfr69"
-postgresql_user="user"
-postgresql_password="12345678"
-postgresql_db="testdb"

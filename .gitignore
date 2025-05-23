@@ -1,11 +1,13 @@
 .env
 
-./frontend/node_modules/*
-./backend/node_modules/*
+.idea/
 
-./terraform/terraform.tfvars
+/frontend/node_modules/
+/backend/node_modules/
 
-./terraform/terraform.tfstate.backup
-./terraform/terraform.tfstate
-./terraform/.terraform/*
-./terraform/.terraform.lock.hcl
+/terraform/terraform.tfvars
+
+/terraform/terraform.tfstate.backup
+/terraform/terraform.tfstate
+/terraform/.terraform/
+/terraform/.terraform.lock.hcl
