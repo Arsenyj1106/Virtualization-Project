@@ -14,7 +14,7 @@ resource "yandex_resourcemanager_folder_iam_member" "todo-roles" {
   "api-gateway.editor",
   ])
   folder_id = var.folder_id
-  member    = "serviceAccount${yandex_iam_service_account.todo-sa.id}"
+  member    = "serviceAccount:${yandex_iam_service_account.todo-sa.id}"
   role      = each.key
 
 }

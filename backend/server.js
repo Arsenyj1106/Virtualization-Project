@@ -1,18 +1,36 @@
 // server.js
 const express = require('express');
+const fs = require("fs");
+
 const { Pool } = require('pg');
+
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
+console.log(process.env.PG_LINK)
 
 const pool = new Pool({
-  connectionString: process.env.PG_LINK,
+  connectionString:  process.env.PG_LINK,
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+    ca: fs
+      .readFileSync("/root/.postgresql/root.crt")
+      .toString(),
+  },
 });
+
+  pool.on('error', (err, client) => {
+    console.error('Unexpected error on idle client', err)
+    process.exit(-1)
+  })
+
+  pool.connect( (err, connection) => {
+    if (err) throw err;
+    console.log('Database is connected successfully !');
+    connection.release();
+  });
 
 // Создание таблицы (один раз)
 const createTable = async () => {
@@ -48,12 +66,12 @@ app.post('/api/tasks', async (req, res) => {
 app.put('/api/tasks/:id', async (req, res) => {
     const { id } = req.params;
     const { title, completed } = req.body;
-  
+
     // Формируем динамический запрос
     const fields = [];
     const values = [];
     let counter = 1;
-  
+
     if (title !== undefined) {
       fields.push(`title = $${counter++}`);
       values.push(title);
@@ -62,23 +80,23 @@ app.put('/api/tasks/:id', async (req, res) => {
       fields.push(`completed = $${counter++}`);
       values.push(completed);
     }
-  
+
     if (fields.length === 0) {
       return res.status(400).json({ error: 'No fields to update' });
     }
-  
+
     values.push(id);
-  
+
     try {
       const result = await pool.query(
         `UPDATE tasks SET ${fields.join(', ')} WHERE id = $${counter} RETURNING *`,
         values
       );
-  
+
       if (result.rows.length === 0) {
         return res.status(404).json({ error: 'Task not found' });
       }
-  
+
       res.json(result.rows[0]);
     } catch (err) {
       console.error('Update error:', err.message);
