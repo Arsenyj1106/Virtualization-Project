@@ -8,7 +8,6 @@ resource "yandex_container_registry" "todo-container-registry" {
 }
 
 //Ревизия не проходит, приходится вручную добавить ревизию в Консоли Облака
-
 resource "yandex_serverless_container" "backend" {
   name               = "backend-container"
   memory            = 256
@@ -30,22 +29,22 @@ resource "yandex_serverless_container" "backend" {
 
 
 }
-
-resource "yandex_serverless_container" "frontend" {
-  name               = "frontend-container"
-  memory            = 256  # MB
-  cores             = 1
-  core_fraction     = 100
-  service_account_id = yandex_iam_service_account.todo-sa.id
-  image {
-    url = "cr.yandex/crpm2hqm1q47oehkscbc/frontend:latest"
-    environment = {
-      PORT="3000"
-    }
-  }
-
-  connectivity {
-    network_id = yandex_vpc_network.network-1.id
-  }
-}
+# Не используем, вместо этого вм
+# resource "yandex_serverless_container" "frontend" {
+#   name               = "frontend-container"
+#   memory            = 256  # MB
+#   cores             = 1
+#   core_fraction     = 100
+#   service_account_id = yandex_iam_service_account.todo-sa.id
+#   image {
+#     url = "cr.yandex/crpm2hqm1q47oehkscbc/frontend:latest"
+#     environment = {
+#       PORT="3000"
+#     }
+#   }
+#
+#   connectivity {
+#     network_id = yandex_vpc_network.network-1.id
+#   }
+# }
 

@@ -1,3 +1,5 @@
+// Неудача с использование container-solution, вместо - вручную созданная Виртуальная машина, с docker
+
 # data "yandex_compute_image" "container-optimized-image" {
 #   family = "container-optimized-image"
 # }

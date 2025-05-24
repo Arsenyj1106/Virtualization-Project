@@ -1,3 +1,5 @@
+// Создает гейтвей, который обрабатывает запросы к апи
+#
 resource "yandex_api_gateway" "tasks_gateway" {
   name        = "tasks-gateway"
   description = "Gateway for Tasks API"

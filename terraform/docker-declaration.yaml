@@ -1,3 +1,4 @@
+# Пытались сделать через это образ фронта, неудача
 version: "1"
 containers:
   - name: frontend

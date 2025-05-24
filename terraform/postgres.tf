@@ -1,3 +1,4 @@
+// Открываем порт
 resource "yandex_vpc_security_group" "postgresql-sg" {
   name        = "postgresql-security-group"
   network_id  = yandex_vpc_network.network-1.id
@@ -6,11 +7,11 @@ resource "yandex_vpc_security_group" "postgresql-sg" {
     protocol       = "TCP"
     port           = 6432
     v4_cidr_blocks = ["0.0.0.0/0"]
-    description    = "Allow PostgreSQL connections from any IP"
+    description    = "Открываем порт "
   }
 }
 
-
+// Обычный кластер...
 resource "yandex_mdb_postgresql_cluster" "todo-postgres-cluster" {
   name        = "todo-postgres-cluster"
   environment = "PRESTABLE"
@@ -45,12 +46,14 @@ resource "yandex_mdb_postgresql_cluster" "todo-postgres-cluster" {
   }
 }
 
+// Базовая БД
 resource "yandex_mdb_postgresql_database" "todo-postgresql" {
   cluster_id = yandex_mdb_postgresql_cluster.todo-postgres-cluster.id
   name       = var.postgresql_db
   owner      = yandex_mdb_postgresql_user.todo-user.name
 }
 
+// Обычный юзер
 resource "yandex_mdb_postgresql_user" "todo-user" {
   cluster_id = yandex_mdb_postgresql_cluster.todo-postgres-cluster.id
   name       = var.postgresql_user

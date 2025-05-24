@@ -26,6 +26,3 @@ variable "postgresql_db" {
   type        = string
 }
 
-output "postgresql_host_fqdn" {
-  value = yandex_mdb_postgresql_cluster.todo-postgres-cluster.host[0].fqdn
-}
