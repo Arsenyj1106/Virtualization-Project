@@ -18,6 +18,7 @@ export default defineConfig(({ command, mode }) => {
     },
     define: {
       VITE_APP_BACKEND_ADDRESS: JSON.stringify(env.VITE_APP_BACKEND_ADDRESS),
+      REACT_APP_API_URL: JSON.stringify(env.REACT_APP_API_URL),
     },
   };
 });

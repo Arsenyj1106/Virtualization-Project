@@ -1,0 +1,8 @@
+version: "1"
+containers:
+  - name: frontend
+    image: cr.yandex/crpm2hqm1q47oehkscbc/frontend:latest
+    ports:
+      - "80:80"
+    env_vars:
+      PORT: "80"

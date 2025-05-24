@@ -9,17 +9,24 @@ interface Task {
 }
 
 // @todo добавить забавных изображений для галочки Object Storage
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+console.log(API_URL);
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [newTask, setNewTask] = useState<string>('');
 
     useEffect(() => {
-        fetchTasks();
+
+
+        API_URL &&
+            fetchTasks();
     }, []);
 
     const fetchTasks = async (): Promise<void> => {
         try {
-            const response = await fetch('http://localhost:8000/api/tasks');
+            const response = await fetch(`${API_URL}`);
             const data: Task[] = await response.json();
             setTasks(data);
         } catch (error) {
@@ -32,7 +39,7 @@ function App() {
         if (!newTask.trim()) return;
 
         try {
-            const response = await fetch('http://localhost:8000/api/tasks', {
+            const response = await fetch(`${API_URL}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +56,7 @@ function App() {
 
     const toggleTask = async (id: number, completed: boolean): Promise<void> => {
         try {
-            await fetch(`http://localhost:8000/api/tasks/${id}`, {
+            await fetch(`${API_URL}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +71,7 @@ function App() {
 
     const deleteTask = async (id: number): Promise<void> => {
         try {
-            await fetch(`http://localhost:8000/api/tasks/${id}`, {
+            await fetch(`${API_URL}/${id}`, {
                 method: 'DELETE',
             });
             setTasks(tasks.filter(task => task.id !== id));

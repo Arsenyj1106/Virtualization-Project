@@ -112,7 +112,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
 });
 
 // Запуск сервера
-const PORT = 8000;
+const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -1,37 +1,25 @@
-
 services:
   backend:
     build: ./backend
-    dns:
-      - 8.8.8.8
-      - 1.1.1.1
     environment:
       PG_LINK: ${PG_LINK}
-      PORT: "8000"
     ports:
       - "8000:8000"
     networks:
       - network
-    volumes:
-      - C:\Users\leoni\.postgresql\root.crt:/root/.postgresql/root.crt
-  frontend-prod:
 
+  frontend-prod:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    environment:
-      - NODE_ENV=production
-      - BACKEND_ADDRESS=http://localhost/api/:8000
     container_name: frontend-prod
     restart: always
     ports:
-      - "3000:3000"
+      - "8080:8080"
     networks:
       - network
     depends_on:
       - backend
-
-
 
 networks:
   network:

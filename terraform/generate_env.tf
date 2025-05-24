@@ -12,3 +12,11 @@ resource "local_file" "env_file_backend" {
   EOF
   filename = "../backend/.env"
 }
+
+
+resource "local_file" "env_frontend" {
+  content = <<-EOF
+    VITE_API_URL=https://${yandex_api_gateway.tasks_gateway.domain}/api/tasks
+  EOF
+  filename = "../frontend/.env"
+}
