@@ -38,6 +38,7 @@
   margin-bottom: 8px;
   background-color: #f8f8f8;
   border-radius: 4px;
+  color: black;
 }
 
 .task-item.completed {

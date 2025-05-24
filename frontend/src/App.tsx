@@ -19,7 +19,7 @@ function App() {
 
     const fetchTasks = async (): Promise<void> => {
         try {
-            const response = await fetch('http://localhost:3000/api/tasks');
+            const response = await fetch('http://localhost:8000/api/tasks');
             const data: Task[] = await response.json();
             setTasks(data);
         } catch (error) {
@@ -32,7 +32,7 @@ function App() {
         if (!newTask.trim()) return;
 
         try {
-            const response = await fetch('http://localhost:3000/api/tasks', {
+            const response = await fetch('http://localhost:8000/api/tasks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ function App() {
 
     const toggleTask = async (id: number, completed: boolean): Promise<void> => {
         try {
-            await fetch(`http://localhost:3000/api/tasks/${id}`, {
+            await fetch(`http://localhost:8000/api/tasks/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ function App() {
 
     const deleteTask = async (id: number): Promise<void> => {
         try {
-            await fetch(`http://localhost:3000/api/tasks/${id}`, {
+            await fetch(`http://localhost:8000/api/tasks/${id}`, {
                 method: 'DELETE',
             });
             setTasks(tasks.filter(task => task.id !== id));

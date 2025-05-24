@@ -1,6 +1,7 @@
 // server.js
 const express = require('express');
 const fs = require("fs");
+const cors = require('cors');
 
 const { Pool } = require('pg');
 
@@ -8,8 +9,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.json());
-
-console.log(process.env.PG_LINK)
+app.use(cors());
 
 const pool = new Pool({
   connectionString:  process.env.PG_LINK,
@@ -112,7 +112,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
 });
 
 // Запуск сервера
-const PORT = 3000;
+const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
